@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <!-- 要使用vue首先要引入vue的库 -->
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- 2、将content写在div之间 这里需要两个花括号 -->
+    <div id="app" >{{content}}</div>
+    <!-- 原生JavaScript的写法 -->
+    <!-- <script>
+        // var dom  = document.getElementById('app');
+        // dom.innerHTML = 'hello world';
+    </script> -->
+    <!-- 使用vue进行编写 -->
+    <script>
+        // 1、创建一个vue实例
+        var app = new Vue({
+            //这里意思就是让vue接管id为app的dom里面的内容
+            el: '#app',
+            data: {
+                content: 'hello world111'
+            }
+        })
+
+        // 隔两秒改变content的内容
+        setTimeout(function() {
+            app.$data.content = 'bye world'
+        }, 2000)
+// 不需要再关注dom操作 而是关注数据的管理
+    </script>
+</body>
+</html>
