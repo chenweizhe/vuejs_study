@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todoList</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--3、在点击按钮事件时拿到输入框里面的数据  -->
+        <input type="text" v-model="inputValue"/>
+        <!-- 2vue的事件绑定 v-on  这里绑定的是一个点击事件 -->
+        <button v-on:click="handleBtnClick">summit</button>
+        <ul>
+            <!-- 第一个指令 v-for  循环list数据 该指令用于循环数据-->
+            <!-- <li v-for="item in list" >{{item}}</li> -->
+            <!-- 2\使用全局组件来实现列标签 -->
+            <!-- 3\使用v-bind将值传给子组件 -->
+            <todo-item v-bind:content="item" v-for="item in list"></todo-item>
+        </ul>
+    </div>
+
+    <script>
+        // 1、vue提供的实现全局组件的方法 template里面是组件内容
+        // Vue.component("TodoItem", {
+        //     // 使用props来接收值
+        //     props: ['content'],
+        //     template: "<li>{{content}}</li>"
+        // })
+
+        // 4\局部组件的使用
+        var TodoItem = {
+            props: ['content'],
+            template: "<li>{{content}}</li>"
+        }
+        // 5\将局部组件注册到Vue实例中
+        var app = new Vue({
+            el: '#app',
+            components: {
+                TodoItem: TodoItem
+            },
+            data: {
+                // list: ['the first class', 'the second class', '3333']
+                list: [],
+                // 这里的数据绑定是双向绑定
+                inputValue: ''
+            },
+            // 事件方法的实现区域
+            methods: {
+                handleBtnClick: function() {
+                    this.list.push(this.inputValue)
+                    // alert(this.inputValue+" added into list")
+                    this.inputValue = ''
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

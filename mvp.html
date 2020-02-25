@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jqueryToList</title>
+    <script src="./jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div>
+        <input id="input" type="text"/>
+        <button id="btn">summit</button>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        function Page(){
+
+        }
+
+        $.extend(Page.prototype, {
+            init: function() {
+                this.bindEvents()
+            },
+            bindEvents: function() {
+                var btn = $('#btn');
+                btn.on('click', $.proxy(this.handleBtnClick, this))
+
+            },
+            handleBtnClick: function() {
+                // alert('123')
+                var inputElem = $('#input');
+                var inputVal = inputElem.val();
+                var list = $('#list');
+                list.append('<li>'+inputVal+'</li>');
+                inputElem.val('')
+            }
+        })
+        var page = new Page()
+        page.init();
+
+    </script>
+
+</body>
+</html>
