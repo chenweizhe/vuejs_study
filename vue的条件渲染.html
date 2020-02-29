@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中的条件渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-if v-else要写在一起 中间不能有其他 -->
+        <div v-if="show === 'a'"> this is a </div>
+        <div v-else-if="show === 'b'">this is b</div>
+        <div v-else> bye world </div>
+
+        <!-- v-show是已经渲染好的 然后只是没显示出来 -->
+        <!-- <div v-show="show">
+            {{message}}
+        </div> -->
+    </div>
+    <script>
+        var vue = new Vue({
+            el: "#app",
+            data: {
+                show: "a",
+                message: "hello world"
+            }
+        })
+    </script>
+</body>
+</html>

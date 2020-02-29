@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setter and getter</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       {{fullName}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstName: "Delll",
+                lastName: "Lee"
+            },
+            computed: {
+                // fullName: function() {
+                //     return this.firstName + " " + this.lastName
+                // }
+                // 可以写成对象的形式 然后调用get set方法
+                fullName: {
+                    get: function() {
+                        return this.firstName + " " + this.lastName
+                    },
+                    set: function(value) {
+                        // console.log(value)
+                        var arr = value.split(" ");
+                        this.firstName = arr[0];
+                        this.lastName = arr[1];
+                    }
+                }
+                
+            }
+            
+        })
+    </script>
+</body>
+</html>

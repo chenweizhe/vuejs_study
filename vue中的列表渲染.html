@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的列表渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-for 数组循环 -->
+        <div v-for="(item, index) of list2" 
+             :key="item.id" >
+            {{item.text}} ------ {{index}}
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    "hello",
+                    "dell",
+                    "nice",
+                    "to",
+                    "meet",
+                    "you"
+                ],
+                list2: [
+                    {
+                        id: '1001',
+                        text: 'hello'
+                    },
+                    {
+                        id: '1002',
+                        text: 'dell'
+                    },
+                    {
+                        id: '1003',
+                        text: 'lee'
+                    }
+                ]
+            },
+        })
+    </script>
+</body>
+</html>
+
+<!-- 改变数据的引用也可以改变前端显示 -->

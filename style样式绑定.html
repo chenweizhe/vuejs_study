@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>style样式绑定</title>
+    <script src="./vue.js"></script>
+</head>
+<!-- 使用style内联样式定义 有两种 一种是对象的形式 另一种是数组的形式-->
+<!-- :style="styleObj" -->
+<body>
+    <div id="app">
+        <div :style="[styleObj], {fontSize: '20px'}" @click="handleClick">
+            Hello World
+        </div>
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                styleObj: {
+                    color: "black"
+                }
+            },
+            methods: {
+                handleClick: function() {
+                    // 三联表达式
+                    this.styleObj.color = this.styleObj.color === "red" ? "black" : "red"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的模版语法</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 这三种都可以写js的表达式 -->
+        <!-- 1、第一种模版语法插值表达式 -->
+        {{name}}
+        <!-- 2 v-text  将div的innertext内容变成v-text的内容-->
+        <div v-text="name"></div>
+        <!-- 3 v-html -->
+        <div v-html="name"></div>
+    </div>
+    <script>
+        var vue  = new Vue({
+            el: "#app",
+            data: {
+                name: "<h1>dell</h1>"
+            }
+        })
+    </script>
+</body>
+</html>

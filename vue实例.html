@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue实例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div v-on:click = "handleClick">{{message}}</div>
+        <item></item>
+    </div>
+
+    <script>
+
+        Vue.component('item', {
+            template: '<div>hello world</div>'
+        })
+        // 使用vue接管页面的一些dom文件
+        // 这是一根实例 一个vue项目可以理解为很多vue实例所组成的
+        var app = new Vue({
+            // 接管这个标签的dom渲染
+            el: '#root',
+            data: {
+                message : 'hello world'
+            },
+            methods: {
+                handleClick : function() {
+                    alert("hello")
+                }
+            }
+        })
+    </script>
+</body>
+</html>
