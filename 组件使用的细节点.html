@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件使用的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <table>
+            <tbody>
+                <!-- 因为tbody里面必须是tr 所以用is关键字将tr指向row -->
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+        <!-- 通过ref关键字进行dom绑定 -->
+        <div ref='hello' @click="handleClick">hello world</div>
+        <counter ref="one" @change='handleChange'></counter>
+        <counter ref="two" @change='handleChange'></counter>
+        <div>{{total}}</div>
+
+    </div>
+
+    <script>
+
+        Vue.component('row', {
+            data: function() {
+                return {
+                    content: 'this is row'
+                }
+            },
+            template: '<tr><td>{{content}}</td></tr>'
+        })
+
+        Vue.component('counter', {
+            template: '<div @click = "handleDclick">{{number}}</div>',
+            data: function() {
+                return {
+                    number: 0
+                }
+            },
+            methods: {
+                handleDclick: function() {
+                    this.number ++
+                    this.$emit('change',1)
+                }
+            }
+        })
+
+        var vue = new Vue({
+            el: "#root",
+            methods: {
+                handleClick: function() {
+                    // this.$refs.ref
+                    console.log(this.$refs.hello.innerHTML)
+                },
+                handleChange: function(step){
+                    this.total  = this.$refs.one.number + this.$refs.two.number
+                }
+            },
+            data: {
+                total: 0
+            }
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件的数据传递</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 单向数据流 -->
+        <!-- 加了冒号 表示一个数字，不加冒号表示为字符串 -->
+        <!-- 子组件向父组件传值 -->
+        <counter :count = "2" @inc="handleIncrease"></counter>
+        <counter :count = "3" @inc="handleIncrease"></counter>
+        <div>{{total}}</div>
+    </div>
+
+    <script>
+        // 局部组件
+        var counter = {
+            // props表示接收子组件接收父组件传递过来的值
+            props: ['count'],
+            // 子组件的data必须是一个函数
+            data: function() {
+                return {
+                    // 即是说 从父组件传过来的值赋给number
+                    number: this.count
+                }
+            },
+            template: '<div @click="hanleClick">{{number}}</div>',
+            methods: {
+                hanleClick: function() {
+                    // this.count ++
+                    this.number++;
+                    this.$emit('inc',1)
+                }
+            }
+        }
+
+        var vue = new Vue({
+            el: "#root",
+            data: {
+                total: 5
+            },
+            // 局部组件需要在父组件里注册
+            components: {
+                counter: counter
+            },
+            methods: {
+                handleIncrease: function(step) {
+                    this.total += step
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
