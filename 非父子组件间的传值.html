@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非父子组件间的传值</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- 如何使用总线机制进行非父子组件之间的传值 (bus/总线/发布订阅模式/观察者模式) -->
+    <div id="app">
+        <child content="dell"></child>
+        <child content="lee"></child>
+    </div>
+
+    <script>
+
+        // 通过总线机制解决传值问题
+        Vue.prototype.bus = new Vue()
+
+        Vue.component('child', {
+            data: function() {
+                return {
+                    selfContent: this.content
+                }
+            },
+            props: {
+                content: String
+            },
+            template: '<div @click="handleClick">{{selfContent}}</div>',
+            methods: {
+                handleClick: function() {
+                    this.bus.$emit('change', this.selfContent)
+                }
+            },
+            // 生命周期钩子
+            mounted: function() {
+                // 对this作用域进行保存
+                var this_ = this
+                this.bus.$on('change', function(msg) {
+                    this_.selfContent = msg
+                })
+            }
+        })
+
+        var vue  = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+</html>

@@ -7,12 +7,29 @@
 </head>
 <body>
     <div id="app">
-        <child></child>
+        <!-- 父组件向子组件传递 子组件有权对传递的值进行约束 这就是参数校验-->
+        <!-- <child :content="123"></child>
+        <child content="速度速度是3"></child> -->
+        <child content="hello world"></child>
+
     </div>
     <script>
 
         Vue.component('child', {
-            template: '<div>Child</div>'
+            props: {
+                //意思是说无论传的是数字还是字符串都可以
+                // content: [Number, String] 
+                content: {
+                    type: String,
+                    // required: false,
+                    // default: 'default value'
+                    // 更复杂的校验 限制传入的值大于5 自定义校验器
+                    validator: function(value) {
+                        return (value.length > 5) 
+                    }
+                }
+            },
+            template: '<div>{{content}}</div>'
         })
 
         var vue = new  Vue({
